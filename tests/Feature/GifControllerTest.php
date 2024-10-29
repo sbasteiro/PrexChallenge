@@ -8,9 +8,8 @@ use App\Models\User;
 use App\Models\FavoriteGif;
 use Laravel\Passport\Passport;
 
-class AuthControllerTest extends TestCase {
+class GifControllerTest extends TestCase {
 
-    use RefreshDatabase;
     protected $user;
 
     protected function setUp(): void {
@@ -31,6 +30,14 @@ class AuthControllerTest extends TestCase {
                         '*' => [],
                     ],
                 ]);
+    }
+
+    /** @test */
+    public function test_user_cannot_search_gifs_with_empty_query() {
+        $response = $this->getJson('/api/gifs/search?query=');
+
+        $response->assertStatus(500)
+                 ->assertJson(['message' => 'La consulta no puede estar vacía']);
     }
 
     /** @test */
@@ -59,6 +66,15 @@ class AuthControllerTest extends TestCase {
             'gif_id' => '123',
             'alias' => 'Mi GIF Favorito',
         ]);
+    }
+
+    /** @test */
+    public function test_user_cannot_get_gif_by_invalid_id() {
+        $invalidGifId = "hola";
+    
+        $response = $this->getJson("/api/gifs/{$invalidGifId}");
+    
+        $response->assertStatus(400);
     }
 
     /** @test */

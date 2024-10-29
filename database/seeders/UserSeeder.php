@@ -9,7 +9,8 @@ use Laravel\Passport\Passport;
 
 class UserSeeder extends Seeder
 {
-    public function run() {
+    public function run()
+    {
         $user = User::create([
             'name' => 'Prueba Usuario', 
             'email' => 'prueba@example.com',
