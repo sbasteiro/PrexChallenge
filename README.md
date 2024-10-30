@@ -66,18 +66,21 @@ Para la solución de este projecto se creó un entorno de desarrollo con docker-
 
 ### Instruciones para levantar en ambiente local
   - Clonar este repositorio: `git clone git@github.com:sbasteiro/PrexChallenge.git`
-  - Copiar el archivo .env.example a .env: `cp .env.example .env`
+  - Copiar el archivo .env.example a .env: `cp .env.example .env`  
   - Levantar docker compose: `docker-compose up`
-  - Instalar las dependencias de composer dentro del contenedor de aplicación:
-    -`docker exec -it prexlaravel-app-1`
-    -`compose install`
+  - Abrir nueva terminal e Instalar las dependencias de composer dentro del contenedor de aplicación:
+    - `docker exec -it [NOMBRE DEL CONTENEDOR DE APP:prexlaravel-app-1] bash`
   - Corregir permisos (aún dentro del contenedor de aplicación):
     - `chown -R www-data:www-data storage bootstrap/cache`
     - `chmod -R 775 storage bootstrap/cache`
-  - Crear client personal (aún dentro del contenedor de aplicación):
-    - `php artisan passport:client --personal`
+  - Con esto listo, podemos descargar el composer, dentro del contenedor de aplicación:
+    - `composer install`  
+  - Para ver los name de los contenedores, fuera de los mismos poner `docker ps`
+  - Dentro del archivo `.env` modificar con el nombre del contenedor de base de datos la variable `DB_HOST=`   
   - Correr las migraciones para la base de datos, con seed que crea el usuario (aún dentro del contenedor de aplicación):
     - `php artisan migrate --seed`
+  - Crear client personal, siguiendo las indicaciones al poner (aún dentro del contenedor de aplicación):
+    - `php artisan passport:client --personal`  
   - Instalar passport para la auth2.0 (aún dentro del contenedor de aplicación):
     - `php artisan passport:install`
   - Ingresando a http://localhost:8081/ debería poder ver la portada de laravel
