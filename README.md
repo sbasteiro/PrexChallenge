@@ -111,8 +111,9 @@ Respuesta de la API:
 }
 ```
 
-#### GET /api/gifs/[GIF_ID]
-Este servicio recibe un ID y consulta la API de GIPHY, devuelve un Json con la información del gif pedido. <br> Colocar en Autorización-> Bearer Token, el generado para todos los servicios.
+#### GET /api/gifs/search?query=[QUERY]&limit=[25]&offset=[OFFSET]
+Este servicio recibe tres parámetros: query, limit y offset. Consulta a la API de GIPHY y retorna todos los registros de gifs que coincidan con los filtros enviados.
+<br> Se agregó la automatización para que el token resultante del login se almacene en el environment, así que no necesita autorización, pero si correr primero el de login.
 
 Respuesta de la API:
 ```
@@ -131,9 +132,9 @@ Respuesta de la API:
         .... continúa"
 ```
 
-#### GET /api/gifs/search?query=[QUERY]&limit=[25]&offset=[OFFSET]
-Este servicio recibe tres parámetros: query, limit y offset. Consulta a la API de GIPHY y retorna todos los registros de gifs que coincidan con los filtros enviados.
-<br> Colocar en Autorización-> Bearer Token, el generado para todos los servicios.
+#### GET /api/gifs/[GIF_ID]
+Este servicio recibe un ID (puede encontrar un id disponible, en la respuesta del servicio anterior) y consulta la API de GIPHY, devuelve un Json con la información del gif pedido. <br> Colocar en Autorización-> Bearer Token, el generado para todos los servicios.
+<br> Se agregó la automatización para que el token resultante del login se almacene en el environment, así que no necesita autorización, pero si correr primero el de login.
 
 Respuesta de la API:
 ```
@@ -154,7 +155,7 @@ Respuesta de la API:
 
 #### POST /api/gifs/favorites
 Este servicio permite agrear gifs favoritos para el usuario logueado, con un alias para recordarlos.
-<br> Colocar en Autorización-> Bearer Token, el generado para todos los servicios.
+<br> Se agregó la automatización para que el token resultante del login se almacene en el environment, así que no necesita autorización, pero si correr primero el de login.
 
 Cuerpo del mensaje:
 ```
@@ -203,8 +204,10 @@ Para esto hemos creado 7 [feature tests](tests/Feature/GifControllerTest.php), q
 ![UML](./diagram/UML_Favourite.png)
 
 #### Casos de uso
+![CASOSDEUSO](./diagram/casosdeuso.png)
 
 #### Secuencia
+![SECUENCIA](./diagram/secuencia.png)
 
 #### DER
 ![DER](./diagram/der.png)
