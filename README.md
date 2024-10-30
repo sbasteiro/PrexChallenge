@@ -1,67 +1,210 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Code Challange Prex
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Challange
+El desafío es integrar una API existente a una una API REST propia que desarrollemos exponiendo un conjunto de servicios. Se deberán entregar distintos diagramas que representen la solución.
 
-## About Laravel
+## Requisitos
+  - Integrarse con la API de GHIPY
+  - Desarrollar un API REST con autenticación OAuth2.0, usar los códigos HTTP según corresponda. La API debe contar con 4 servicios:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+    | Login | Permite la autenticación para operar con la API |
+    | -- | -- |
+    | Entrada | email \| password |
+    | Salida | token con expiración de 30 minutos |
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    | ** Buscar GIFS | Buscar gifs por una frase o término |
+    | -- | -- |
+    | Entrada | Filtros:<br> `QUERY` : requerido\|cadena<br> `LIMIT` : opcional\|numérico<br> `OFFSET` opcional\|numérico |
+    | Salida | Colección con resultados de búsqueda |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    | ** Buscar GIF por ID | Obtener información de un gift específico |
+    | -- | -- |
+    | Entrada | `ID` : requerido\|numérico |
+    | Salida | Datos del recurso consultado |
 
-## Learning Laravel
+    | ** Guardar GIF favorito | Almacenar para un usuario un gif favorito |
+    | -- | -- |
+    | Entrada | `GIF_ID `: requerido\|numérico<br> `ALIAS` : requerido\|cadena<br> `USER_ID` : requerido\|numérico |
+    | Salida | mensaje de éxito |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+  - Toda la interacción con los servicios deberá persistirse registrando la siguiente información:
+    - Usuario que realizo la petición
+    - Servicio consultado
+    - Cuerpo de la petición
+    - Código HTTP de la respuesta
+    - Cuerpo de la respuesta
+    - IP de origen de la consulta
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+  - Aplicar test unitarios o features
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Tecnologías a aplicar:
+  - PHP v8.2 en adelante
+  - Laravel Framework v10
+  - MariaDB ó MySQL
+  - UML
+  - Docker
 
-## Laravel Sponsors
+## Entrega
+Una vez finalizado el desafío el mismo deberá subirse a un repositorio GIT (GitHub, Bitbucket) y contar con un archivo README.md que describa el despliegue del proyecto que incluya:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+  - Diagrama de Casos de Uso
+  - Diagrama de Secuencia que refleje todos los casos de uso
+  - Diagrama de Datos o DER
+  - Colección POSTMAN con la descripción de los servicios. Integrando además automatización para que el token resultante del login se almacene en el environment
+  - Dockerfile para levantar el proyecto
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+<br>
 
-## Contributing
+## Solución
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Contenerización
+Para la solución de este projecto se creó un entorno de desarrollo con docker-compose que incluye la definición de tres contenedores:
+ - Un contenedor de aplicación para laravel
+ - Un contenedor para la base de datos mysql
+ - Un contenedor para el webserver con nginx
 
-## Code of Conduct
+### Instruciones para levantar en ambiente local
+  - Clonar este repositorio: `git clone git@github.com:sbasteiro/PrexChallenge.git`
+  - Copiar el archivo .env.example a .env: `cp .env.example .env`
+  - Levantar docker compose: `docker-compose up`
+  - Instalar las dependencias de composer dentro del contenedor de aplicación:
+    -`docker exec -it prexlaravel-app-1`
+    -`compose install`
+  - Corregir permisos (aún dentro del contenedor de aplicación):
+    - `chown -R www-data:www-data storage bootstrap/cache`
+    - `chmod -R 775 storage bootstrap/cache`
+  - Crear client personal (aún dentro del contenedor de aplicación):
+    - `php artisan passport:client --personal`
+  - Correr las migraciones para la base de datos, con seed que crea el usuario (aún dentro del contenedor de aplicación):
+    - `php artisan migrate --seed`
+  - Instalar passport para la auth2.0 (aún dentro del contenedor de aplicación):
+    - `php artisan passport:install`
+  - Ingresando a http://localhost:8081/ debería poder ver la portada de laravel
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+### Integración con la API de GIPHY
+Será necesario crear un usuario y obtener una clave `Api Key` que se debera ingresar en el archivo de variables de entorno `.env`.<br>
+Para eso puede ingrear a https://developers.giphy.com/dashboard/?create=true, seleccionar `Create an API Key` y luego se seguir las instrucciones hasta conseguir la misma.<br>
+Para este ejemplo utilizamos una de prueba, pero tenga en cuenta que tiene un límite de 100 consumos por hora.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Desarrollar un API REST con autenticación OAuth2.0
+Utilizamos el paquete `passport` nativo de laravel v10, que nos permite utilizar el protocolo Auth2.0 como método de autenticación de usuario.<br>
+El modo de autenticación es enviando el email y password, la API devolverá el `token` de accesso, el mismo se utilizará para todos los servicios.
 
-## License
+### Servicios
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
->>>>>>> 35b662d (Initial commit)
+#### POST /api/login
+Este servicio recibe un email y un password, devuelve un token de acceso.
+Cuerpo de mensaje
+```
+{
+    "email": "prueba@example.com",
+    "password": "prueba"
+}
+```
+
+Respuesta de la API:
+```
+{
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGVhZDIxMmNjNDNjYzg0MDI4MmExOTdlZGE0YWI0MzI4OTlhNWNkZWZmZDgzZjdjMWNlNGFiMDY3ZDc0MGRlOWNlNmQxNDhiMGFjYjhmM2IiLCJpYXQiOjE3MzAyNDM4ODguNDI1ODM0LCJuYmYiOjE3MzAyNDM4ODguNDI1ODM2LCJleHAiOjE3NjE3Nzk4ODguNDE5NzM0LCJzdWIiOiI3Iiwic2NvcGVzIjpbXX0.CEIGNp-k3ljAwxxpXFyp3CL6IS8PP3zw2YuCakCW0vFqPU7bDyqBaSYfmGZKkBzWe0tz1yPauLmm12DTUjFBLWOKaGRHqyfGjt_KcRha-UoeaR-khXwnDG8MIxEW2TatSJJvAPrRBxYYLuxxUfAAbGBNPr_u3YaSwqe25SPJ5b5QIPKlEgPTogsybUtvLDkUiMmQINI8v451LEB_LLNOSRKxAkGKbUxmEaaX7LHlL1LaZXk4xVlLudLGpXJ3UuuKAlG3pgY5cembIN4s85xd5agMWuozRHvdSkb2KC_Cgc0bWrRDOEMs-p_Ji_o-HfHAWS_Hpiyl8jic5TVn55a5XJQa4gsdM55mWIaqrxCtnNITQ_KUgAmC6kBaE-1MsVUdYULI0fIfJP7y9ewTc0wkIm-n31P2VXT-qw3NvRsFRxAal5Z3S3ti-OFQkRdncbE3Ze2rFze6hMm3KwqVmAE5luRarDF9SG2cfpgDTOfY5sozK3VVPSSMimg1EixHuBzHNOlH-EUUKnTN8VKO0wVSVSsxuIVwg_M07ZEHk0lrwQd6fGAsQDn_iKJ9Guh7bUCxpnLWoXAngwdPjdodo0A2-j9Ll23pC2d3nqTdXM4wyF4D2x12ihN5Ox--RL_jZGeCcWb8zIkeorjNvzuNIhcAJMmemQ-JqDv0MtZ5RRPBCqc"
+}
+```
+
+#### GET /api/gifs/[GIF_ID]
+Este servicio recibe un ID y consulta la API de GIPHY, devuelve un Json con la información del gif pedido. <br> Colocar en Autorización-> Bearer Token, el generado para todos los servicios.
+
+Respuesta de la API:
+```
+{
+    "data": {
+        "type": "gif",
+        "id": "0r9AnKXGbeWPHdqPiE",
+        "url": "https://giphy.com/gifs/SWAG-0r9AnKXGbeWPHdqPiE",
+        "slug": "SWAG-0r9AnKXGbeWPHdqPiE",
+        "bitly_gif_url": "https://gph.is/g/ZP073w7",
+        "bitly_url": "https://gph.is/g/ZP073w7",
+        "embed_url": "https://giphy.com/embed/0r9AnKXGbeWPHdqPiE",
+        "username": "SWAG",
+        }
+}        
+        .... continúa"
+```
+
+#### GET /api/gifs/search?query=[QUERY]&limit=[25]&offset=[OFFSET]
+Este servicio recibe tres parámetros: query, limit y offset. Consulta a la API de GIPHY y retorna todos los registros de gifs que coincidan con los filtros enviados.
+<br> Colocar en Autorización-> Bearer Token, el generado para todos los servicios.
+
+Respuesta de la API:
+```
+{
+    "data": {
+        "type": "gif",
+        "id": "0r9AnKXGbeWPHdqPiE",
+        "url": "https://giphy.com/gifs/SWAG-0r9AnKXGbeWPHdqPiE",
+        "slug": "SWAG-0r9AnKXGbeWPHdqPiE",
+        "bitly_gif_url": "https://gph.is/g/ZP073w7",
+        "bitly_url": "https://gph.is/g/ZP073w7",
+        "embed_url": "https://giphy.com/embed/0r9AnKXGbeWPHdqPiE",
+        "username": "SWAG",
+        }
+}        
+        .... continúa"
+```
+
+#### POST /api/gifs/favorites
+Este servicio permite agrear gifs favoritos para el usuario logueado, con un alias para recordarlos.
+<br> Colocar en Autorización-> Bearer Token, el generado para todos los servicios.
+
+Cuerpo del mensaje:
+```
+{
+    "gif_id": "l3fQf1OEAq0iri9RC",
+    "alias": "Mi GIF Favorito"
+}
+
+```
+Respuesta de la API:
+```
+{
+    "message": "GIF agregado a favoritos."
+}
+```
+
+### Collecion de servicios en postman
+Importe esta colección para probar las llamadas a los servicios desde postman: [postman_collection.json](postman_collection.json)
+
+### Registrando de interacción de servicios
+Para esto hemos creado la tabla `service_interactions` y un middleware `LogServiceInteraction.php` que registra la informacion solicitada para cada llamada de servicio.<br>
+La estructura de la tabla esta definida en esta [migracion](./database/migrations/2024_10_29_184243_create_service_interactions_table.php)
+
+### Test unitarios o features
+Para esto hemos creado 7 [feature tests](tests/Feature/GifControllerTest.php), que evaluan los siguientes casos:
+  - test_user_can_search_gifs
+  - test_user_cannot_search_gifs_with_empty_query
+  - test_user_can_get_gif_by_id
+  - test_user_can_store_favorite_gif
+  - test_user_cannot_get_gif_by_invalid_id
+  - test_user_cannot_store_duplicate_favorite_gif
+
+### Tecnologías aplicadas:
+  - PHP v8.3
+  - Laravel Framework v10
+  - MySQL
+  - UML
+  - Docker / Docker Compose
+
+### Diagramas
+
+#### UML
+![UML](./diagram/UML_login.png)
+![UML](./diagram/UML_GetGifs.png)
+![UML](./diagram/UML_GetGifByID.png)
+![UML](./diagram/UML_Favourite.png)
+
+#### Casos de uso
+
+#### Secuencia
+
+#### DER
+![DER](./diagram/der.png)

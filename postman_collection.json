@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "d13ea4b6-0a8d-4b09-92d8-79b8d2095dd8",
+		"name": "APIREST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6965766"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"prueba@example.com\",\r\n    \"password\": \"prueba\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Favorites",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNjNkYWYwZGQxMWU1ODAxNWIxNjVhNWI1YThhNTJkZWQ4MjBhNTZhYmY3ZWU0YjU1ZmJkMjk4Mzc5NDgwMzRlZjRiOWZjNWZkNzAwZDFmNWIiLCJpYXQiOjE3MzAyMjc1ODMuOTc3OTM5LCJuYmYiOjE3MzAyMjc1ODMuOTc3OTQzLCJleHAiOjE3NjE3NjM1ODMuOTc0MDY0LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.d-XlAt4Ay9B0w4FEfNQ1kNSvpKygcaihwGCiBFqr7SrjAfQqwv1AKFwhziRcxFQJiFK266A2eGIlpVJHTNfylL9r1aStqg1oqSq7LDz9IWvRyD8yooHw_cjDLtraI86NSAItiwcz0z7Lrig6KLkmobIJ3D7UloVsGJscjw9wzd2_Lh8mjfKjb6RIVQp17HLw4CB3an19TzKl78l0D-VaEFmamnZCvunBcYxmGSJbGdpJtJ7MbgRicGdWgKtrbr4qnF7sPJBzE3-vlf0uj61EoX_Y56Z01_GZET2aBadoZdiRw0MbPI9H6DD7aRHtTtVz1GDOBG0tW7mYyz0tw0jXa0trp3gIa80lQSeFrdfZVjqwvQlK3YMp0qM_--E_RVDDpQpFWzFViK8xUDUrqf42E-6TR6PgJy4RtuZdsZGCjyahx3SeYwObR6TcoSMyJPihKS2ko3C0SLuPGx5-KAxoouZE6pbbYq-wKhT4xlS4uDYf8M7UkSSNH2HaTB98dd4sRBqyzAeDLTUkME0kzhLLpxQm4pIJcHejWa20UaNd730uQ42L_LXoAgnwKbuIBc1eyyM-7bqOAqLLHlQIDdTrh8VtIDTjddtYu4ovxio9KYSjtxa9303qyczVd9NZsSw_eHhx4GuAIwF-AxiiMf9kwPwRf10XGcKSV0Kb2Cn34ZE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"gif_id\": \"l3fQf1OEAq0iri9RC\",\r\n    \"alias\": \"Mi GIF Favorito\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/gifs/favorites",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"gifs",
+						"favorites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchGifs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNjNkYWYwZGQxMWU1ODAxNWIxNjVhNWI1YThhNTJkZWQ4MjBhNTZhYmY3ZWU0YjU1ZmJkMjk4Mzc5NDgwMzRlZjRiOWZjNWZkNzAwZDFmNWIiLCJpYXQiOjE3MzAyMjc1ODMuOTc3OTM5LCJuYmYiOjE3MzAyMjc1ODMuOTc3OTQzLCJleHAiOjE3NjE3NjM1ODMuOTc0MDY0LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.d-XlAt4Ay9B0w4FEfNQ1kNSvpKygcaihwGCiBFqr7SrjAfQqwv1AKFwhziRcxFQJiFK266A2eGIlpVJHTNfylL9r1aStqg1oqSq7LDz9IWvRyD8yooHw_cjDLtraI86NSAItiwcz0z7Lrig6KLkmobIJ3D7UloVsGJscjw9wzd2_Lh8mjfKjb6RIVQp17HLw4CB3an19TzKl78l0D-VaEFmamnZCvunBcYxmGSJbGdpJtJ7MbgRicGdWgKtrbr4qnF7sPJBzE3-vlf0uj61EoX_Y56Z01_GZET2aBadoZdiRw0MbPI9H6DD7aRHtTtVz1GDOBG0tW7mYyz0tw0jXa0trp3gIa80lQSeFrdfZVjqwvQlK3YMp0qM_--E_RVDDpQpFWzFViK8xUDUrqf42E-6TR6PgJy4RtuZdsZGCjyahx3SeYwObR6TcoSMyJPihKS2ko3C0SLuPGx5-KAxoouZE6pbbYq-wKhT4xlS4uDYf8M7UkSSNH2HaTB98dd4sRBqyzAeDLTUkME0kzhLLpxQm4pIJcHejWa20UaNd730uQ42L_LXoAgnwKbuIBc1eyyM-7bqOAqLLHlQIDdTrh8VtIDTjddtYu4ovxio9KYSjtxa9303qyczVd9NZsSw_eHhx4GuAIwF-AxiiMf9kwPwRf10XGcKSV0Kb2Cn34ZE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/gifs/search?query=funny&limit=25&offset=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"gifs",
+						"search"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "funny"
+						},
+						{
+							"key": "limit",
+							"value": "25"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchGifById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNjNkYWYwZGQxMWU1ODAxNWIxNjVhNWI1YThhNTJkZWQ4MjBhNTZhYmY3ZWU0YjU1ZmJkMjk4Mzc5NDgwMzRlZjRiOWZjNWZkNzAwZDFmNWIiLCJpYXQiOjE3MzAyMjc1ODMuOTc3OTM5LCJuYmYiOjE3MzAyMjc1ODMuOTc3OTQzLCJleHAiOjE3NjE3NjM1ODMuOTc0MDY0LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.d-XlAt4Ay9B0w4FEfNQ1kNSvpKygcaihwGCiBFqr7SrjAfQqwv1AKFwhziRcxFQJiFK266A2eGIlpVJHTNfylL9r1aStqg1oqSq7LDz9IWvRyD8yooHw_cjDLtraI86NSAItiwcz0z7Lrig6KLkmobIJ3D7UloVsGJscjw9wzd2_Lh8mjfKjb6RIVQp17HLw4CB3an19TzKl78l0D-VaEFmamnZCvunBcYxmGSJbGdpJtJ7MbgRicGdWgKtrbr4qnF7sPJBzE3-vlf0uj61EoX_Y56Z01_GZET2aBadoZdiRw0MbPI9H6DD7aRHtTtVz1GDOBG0tW7mYyz0tw0jXa0trp3gIa80lQSeFrdfZVjqwvQlK3YMp0qM_--E_RVDDpQpFWzFViK8xUDUrqf42E-6TR6PgJy4RtuZdsZGCjyahx3SeYwObR6TcoSMyJPihKS2ko3C0SLuPGx5-KAxoouZE6pbbYq-wKhT4xlS4uDYf8M7UkSSNH2HaTB98dd4sRBqyzAeDLTUkME0kzhLLpxQm4pIJcHejWa20UaNd730uQ42L_LXoAgnwKbuIBc1eyyM-7bqOAqLLHlQIDdTrh8VtIDTjddtYu4ovxio9KYSjtxa9303qyczVd9NZsSw_eHhx4GuAIwF-AxiiMf9kwPwRf10XGcKSV0Kb2Cn34ZE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/gifs/0r9AnKXGbeWPHdqPiE",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"gifs",
+						"0r9AnKXGbeWPHdqPiE"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
