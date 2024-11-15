@@ -1,5 +1,3 @@
-# Code Challange Prex
-
 ## Challange
 El desafío es integrar una API existente a una una API REST propia que desarrollemos exponiendo un conjunto de servicios. Se deberán entregar distintos diagramas que representen la solución.
 
